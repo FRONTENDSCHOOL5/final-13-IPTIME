@@ -14,7 +14,7 @@ export default function Following() {
   const [following, setFollowing] = useState([]);
 
   const location = useLocation();
-  const accountName = location.state;
+  const { accountName, myAccountName } = location.state;
   // const token = localStorage.getItem('token');
 
   const token = useRecoilValue(loginState);
@@ -99,6 +99,7 @@ export default function Following() {
                   userInfo={user} // 내가 팔로우 하는 사람들 각각의 정보를 넘김
                   followHandler={followHandler}
                   size={'small'}
+                  myAccountName={myAccountName}
                 />
               </Link>
             </li>

@@ -14,7 +14,8 @@ export default function Follower() {
   const [followers, setFollowers] = useState([]);
 
   const location = useLocation();
-  const accountName = location.state;
+  const { accountName, myAccountName } = location.state;
+  // console.log(accountName, myAccountName);
   // localstorage에 바로 값을 가져오지만 recoil사용할 경우에는 recoil을 사용해서 값을 가져오면 됨
   // const token = localStorage.getItem('token');
 
@@ -88,7 +89,7 @@ export default function Follower() {
       alert(`${error.response.data.message}`);
     }
   };
-
+  console.log(accountName);
   return (
     <>
       <TopBasicNav>Followers</TopBasicNav>
@@ -96,7 +97,7 @@ export default function Follower() {
         {/* 3. 이곳에 useState에 채워져있는 배열이 map으로 뿌려지게 되고, 빈 화면이 아니라 유저들의 정보가 화면에 뿌려지게 된다. */}
 
         {followers.map((user) => {
-          console.log(user);
+          // console.log(myAccountName);
           return (
             <li key={user._id}>
               <Link
@@ -109,6 +110,7 @@ export default function Follower() {
                   userInfo={user} // 나를 팔로우 하는 사람들 각각의 정보를 넘김
                   followHandler={followHandler} // 팔로우 핸들러 함수
                   size={'small'} // 아이콘 사이즈
+                  myAccountName={myAccountName}
                 />
               </Link>
             </li>
